@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class shar_mass : MonoBehaviour
+public class BallMassTest : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Rigidbody rb;
+
     void Start()
     {
-        
-    }
+        rb = GetComponent<Rigidbody>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        float mass = PlayerPrefs.GetFloat("PlayerMass", 1f);
+        rb.mass = mass;
+
+        Debug.Log("Установлена масса: " + mass);
+
+        // Применим силу, чтобы видно было разницу
+        rb.AddForce(Vector3.forward * 10f, ForceMode.Impulse);
     }
 }
