@@ -25,8 +25,8 @@ public class CubeMassAndFriction : MonoBehaviour
     void FixedUpdate()
     {
         // Имитация трения — уменьшаем скорость
-        Vector3 velocity = rb.velocity;
+        Vector3 velocity = rb.linearVelocity;
         velocity.x *= (1 - Time.fixedDeltaTime * frictionStrength);
-        rb.velocity = velocity;
+        rb.linearVelocity = velocity;
     }
 }
