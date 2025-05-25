@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 85874881}
   - component: {fileID: 85874880}
   m_Layer: 5
-  m_Name: MassInputField (1)
+  m_Name: "\u044B\u0440\u0444\u043A"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -603,7 +603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 440.91016, y: 143}
+  m_AnchoredPosition: {x: 232, y: 143}
   m_SizeDelta: {x: 65.481, y: 29.995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216941833
@@ -739,7 +739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 365, y: 87.695}
+  m_AnchoredPosition: {x: 307.91, y: 87.695}
   m_SizeDelta: {x: 217.3003, y: 33.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &283332389
@@ -1592,7 +1592,7 @@ GameObject:
   - component: {fileID: 864891005}
   - component: {fileID: 864891004}
   m_Layer: 5
-  m_Name: MassInputField (2)
+  m_Name: MassInputFieldTrenue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1798,7 +1798,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 887631045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 006c8f0a15c697841a2cece02c8d6292, type: 3}
+  m_Script: {fileID: 11500000, guid: 881724eaf5115cd409f04fcbd2c5c822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &975248236
@@ -2840,7 +2840,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 379.00015, y: 32.266}
+  m_AnchoredPosition: {x: 304.03, y: 31.734}
   m_SizeDelta: {x: 209.5489, y: 30.5315}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1283859563
@@ -3566,7 +3566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -90, y: -208}
+  m_AnchoredPosition: {x: -122, y: -145}
   m_SizeDelta: {x: 155.1059, y: 55.3976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1387349778
@@ -3644,6 +3644,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1589653884}
+        m_TargetAssemblyTypeName: MassInputManager, Assembly-CSharp
+        m_MethodName: OnStartButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3992,6 +4004,53 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1589653883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1589653885}
+  - component: {fileID: 1589653884}
+  m_Layer: 0
+  m_Name: UIManagerShar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1589653884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589653883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 768dccd3bdcc4a24687a5a78b3a21b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  massInputField: {fileID: 2043705028}
+  errorPanel: {fileID: 0}
+  errorText: {fileID: 0}
+--- !u!4 &1589653885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589653883}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 426.85815, y: 288.14728, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1743045705
 GameObject:
   m_ObjectHideFlags: 0
@@ -4030,7 +4089,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 92, y: -208}
+  m_AnchoredPosition: {x: 100.000015, y: -145}
   m_SizeDelta: {x: 155.1059, y: 55.3976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1743045707
@@ -4165,25 +4224,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1918440789}
+      - m_Target: {fileID: 1589653884}
         m_TargetAssemblyTypeName: MassInputManager, Assembly-CSharp
-        m_MethodName: OnPlayButtonClicked
+        m_MethodName: OnStartButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 887631045}
-        m_TargetAssemblyTypeName: MassInputManager, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4493,7 +4540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e9c8c2327220a44b1e0b00f1af2152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputField: {fileID: 2043705028}
+  inputField: {fileID: 864891004}
 --- !u!4 &1918440790
 Transform:
   m_ObjectHideFlags: 0
@@ -4700,7 +4747,7 @@ GameObject:
   - component: {fileID: 2043705029}
   - component: {fileID: 2043705028}
   m_Layer: 5
-  m_Name: MassInputField
+  m_Name: sharImput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5516,3 +5563,4 @@ SceneRoots:
   - {fileID: 1793676971}
   - {fileID: 1918440790}
   - {fileID: 887631047}
+  - {fileID: 1589653885}

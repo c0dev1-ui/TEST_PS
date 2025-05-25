@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro; // обязательно для TMP_InputField
 
-public class MassInputManager : MonoBehaviour
+public class MassInputManagerd : MonoBehaviour
 {
     public TMP_InputField inputField;
 
@@ -11,7 +11,7 @@ public class MassInputManager : MonoBehaviour
         if (float.TryParse(inputField.text, out float mass))
         {
             PlayerPrefs.SetFloat("PlayerMass", mass);
-            SceneManager.LoadScene("GameScene"); // замени на название своей сцены
+            SceneManager.LoadScene("GameScene"); 
         }
         else
         {
