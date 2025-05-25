@@ -1,43 +1,63 @@
 using UnityEngine;
 
-public class PanelToggle : MonoBehaviour
+public class DualButtonPanelController : MonoBehaviour
 {
-	// Панель, которую нужно показать
-	public GameObject hiddenPanel;
+    public GameObject panel;               // Панель, которую показываем/скрываем
+    public GameObject[] buttonsToHide;     // Кнопки, которые скрываем и показываем
 
+    private bool isPanelOpen = false;      // Флаг, чтобы не выполнять действия повторно
 
-	// Кнопка, которую нужно скрыть (сам объект кнопки, а не только её визуальная часть)
-	public GameObject buttonToHide;
+    public void ShowPanel()
+    {
+        if (isPanelOpen)
+        {
+            Debug.Log("Панель уже открыта — повторное открытие отменено.");
+            return;
+        }
 
+        if (panel != null)
+        {
+            panel.SetActive(true);
+            isPanelOpen = true;
+        }
+        else
+        {
+            Debug.LogError("Panel не назначена!");
+        }
 
+        foreach (var btn in buttonsToHide)
+        {
+            if (btn != null)
+            {
+                btn.SetActive(false);
+            }
+            else
+            {
+                Debug.LogWarning("Одна из кнопок в списке не назначена.");
+            }
+        }
+    }
 
-	// Метод вызывается при нажатии на кнопку
-	public void ShowPanelAndHideButton()
-	{
-		if (hiddenPanel != null)
-		{
-			hiddenPanel.SetActive(true); // Показываем панель
-		}
+    public void HidePanel()
+    {
+        if (!isPanelOpen)
+        {
+            Debug.Log("Панель уже закрыта — повторное закрытие отменено.");
+            return;
+        }
 
-		if (buttonToHide != null)
-		{
-			buttonToHide.SetActive(false); // Скрываем кнопку
-		}
-	}
-	
-	public void HidePanelAndShowButton()
-{
-	if (hiddenPanel != null)
-	{
-		hiddenPanel.SetActive(false);
-	}
+        if (panel != null)
+        {
+            panel.SetActive(false);
+            isPanelOpen = false;
+        }
 
-	if (buttonToHide != null)
-	{
-		buttonToHide.SetActive(true);
-	}
-}
-
-	
-	
+        foreach (var btn in buttonsToHide)
+        {
+            if (btn != null)
+            {
+                btn.SetActive(true);
+            }
+        }
+    }
 }
