@@ -5,22 +5,29 @@ using TMPro;
 public class MassInputManager : MonoBehaviour
 {
     public TMP_InputField massInputField;
+    public TMP_InputField angleInputField; // новое поле
     public GameObject errorPanel;
     public TextMeshProUGUI errorText;
+
     void Start()
     {
-    // Установим значение по умолчанию
-        massInputField.text = "1";
+        float savedMass = PlayerPrefs.GetFloat("BallMass", 1f);
+        massInputField.text = savedMass.ToString("0.##");
+
+        float savedAngle = PlayerPrefs.GetFloat("CubeAngle", 30f);
+        angleInputField.text = savedAngle.ToString("0.##");
     }
 
     public void OnStartButtonClicked()
     {
-        string input = massInputField.text;
-        float mass;
+        string massInput = massInputField.text;
+        string angleInput = angleInputField.text;
 
-        if (!float.TryParse(input, out mass))
+        float mass, angle;
+
+        if (!float.TryParse(massInput, out mass))
         {
-            ShowError("Введите число.");
+            ShowError("Масса — это число.");
             return;
         }
 
@@ -30,7 +37,20 @@ public class MassInputManager : MonoBehaviour
             return;
         }
 
+        if (!float.TryParse(angleInput, out angle))
+        {
+            ShowError("Угол — это число.");
+            return;
+        }
+
+        if (angle < 0 || angle > 90)
+        {
+            ShowError("Угол должен быть от 0 до 90.");
+            return;
+        }
+
         PlayerPrefs.SetFloat("BallMass", mass);
+        PlayerPrefs.SetFloat("CubeAngle", angle);
         SceneManager.LoadScene("SimulationScene");
     }
 
