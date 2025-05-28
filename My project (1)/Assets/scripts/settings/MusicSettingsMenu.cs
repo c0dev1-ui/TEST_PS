@@ -11,6 +11,22 @@ public class MusicSettingsMenu : MonoBehaviour
     public Button selectMusicButton;
     public AudioSource audioSource;
 
+    private static MusicSettingsMenu instance;
+
+    private void Awake()
+    {
+        // Сохраняем объект между сценами
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Не уничтожать при загрузке новой сцены
+        }
+        else
+        {
+            Destroy(gameObject); // Удалить дубликаты
+        }
+    }
+
     private void Start()
     {
         volumeSlider.value = audioSource.volume;
