@@ -2,18 +2,19 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
 {
-    private static MusicPlayer instance;
+    public static MusicPlayer Instance;
+    public AudioSource audioSource;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // сохраняем при переходе между сценами
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // удаляем дубликат, если уже есть
+            Destroy(gameObject);
         }
     }
 }

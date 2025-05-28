@@ -9,41 +9,32 @@ public class MusicSettingsMenu : MonoBehaviour
 {
     public Slider volumeSlider;
     public Button selectMusicButton;
-    public AudioSource audioSource;
-
-    private static MusicSettingsMenu instance;
-
-    private void Awake()
-    {
-        // Сохраняем объект между сценами
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Не уничтожать при загрузке новой сцены
-        }
-        else
-        {
-            Destroy(gameObject); // Удалить дубликаты
-        }
-    }
 
     private void Start()
     {
-        volumeSlider.value = audioSource.volume;
-        volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
-        selectMusicButton.onClick.AddListener(OpenFileDialog);
+        if (MusicPlayer.Instance != null)
+        {
+            volumeSlider.value = MusicPlayer.Instance.audioSource.volume;
+            volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+            selectMusicButton.onClick.AddListener(OpenFileDialog);
+        }
+        else
+        {
+            Debug.LogError("MusicPlayer not found!");
+        }
     }
 
     private void OnVolumeChanged(float value)
     {
-        audioSource.volume = value;
+        if (MusicPlayer.Instance != null)
+            MusicPlayer.Instance.audioSource.volume = value;
     }
 
     private void OpenFileDialog()
     {
 #if UNITY_STANDALONE || UNITY_EDITOR
         var paths = StandaloneFileBrowser.OpenFilePanel("Выберите аудиофайл", "", new[] {
-            new ExtensionFilter("Аудиофайлы", "mp3", "wav", "ogg")
+            new ExtensionFilter("Audio Files", "mp3", "wav", "ogg")
         }, false);
 
         if (paths.Length > 0 && File.Exists(paths[0]))
@@ -62,27 +53,23 @@ public class MusicSettingsMenu : MonoBehaviour
         {
             yield return www.SendWebRequest();
 
-#if UNITY_2020_1_OR_NEWER
             if (www.result != UnityWebRequest.Result.Success)
-#else
-            if (www.isNetworkError || www.isHttpError)
-#endif
             {
-                Debug.LogError("Ошибка загрузки аудио: " + www.error);
+                Debug.LogError("Ошибка загрузки: " + www.error);
             }
             else
             {
                 AudioClip clip = DownloadHandlerAudioClip.GetContent(www);
-                audioSource.clip = clip;
-                audioSource.Play();
+                MusicPlayer.Instance.audioSource.clip = clip;
+                MusicPlayer.Instance.audioSource.Play();
             }
         }
     }
 
-    private AudioType GetAudioTypeFromExtension(string extension)
+    private AudioType GetAudioTypeFromExtension(string ext)
     {
-        extension = extension.ToLower();
-        switch (extension)
+        ext = ext.ToLower();
+        switch (ext)
         {
             case ".mp3": return AudioType.MPEG;
             case ".wav": return AudioType.WAV;
