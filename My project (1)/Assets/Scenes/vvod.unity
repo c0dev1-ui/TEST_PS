@@ -6446,7 +6446,7 @@ MonoBehaviour:
   defaultMass: 1
   defaultAngle: 30
   defaultThirdValue: 10
-  sceneToLoad: 223
+  sceneToLoad: 1yroven
 --- !u!4 &1589653885
 Transform:
   m_ObjectHideFlags: 0
