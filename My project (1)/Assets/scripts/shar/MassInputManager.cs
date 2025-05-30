@@ -4,68 +4,62 @@ using TMPro;
 
 public class MassInputManager : MonoBehaviour
 {
-	public TMP_InputField massInputField;
-	public TMP_InputField angleInputField;
-	
-	public GameObject errorPanel;
-	public TextMeshProUGUI errorText;
+    public TMP_InputField massInputField;      // Поле ввода массы
+    public TMP_InputField angleInputField;     // Поле ввода угла
 
-	
-	void Start()
-	{
-		float savedMass = PlayerPrefs.GetFloat("BallMass", 1f);
-		massInputField.text = savedMass.ToString("0.##");
-		
+    public TextMeshProUGUI massErrorText;      // Ошибка по массе
+    public TextMeshProUGUI angleErrorText;     // Ошибка по углу
 
-		float savedAngle = PlayerPrefs.GetFloat("CubeAngle", 30f);
-		angleInputField.text = savedAngle.ToString("0.##");
-	}
+    void Start()
+    {
+        // Установка сохранённых значений по умолчанию
+        massInputField.text = PlayerPrefs.GetFloat("BallMass", 1f).ToString("0.##");
+        angleInputField.text = PlayerPrefs.GetFloat("CubeAngle", 30f).ToString("0.##");
+        ClearErrors();
+    }
 
-	public void OnStartButtonClicked()
-	{
-		string massInput = massInputField.text;
-		string angleInput = angleInputField.text;
-	
+    public void OnStartButtonClicked()
+    {
+        ClearErrors();
 
-		float mass, angle;
+        float mass, angle;
+        bool hasError = false;
 
-		if (!float.TryParse(massInput, out mass))
-		{
-			ShowError("Масса — это число.");
-			return;
-		}
+        // Проверка массы
+        if (!float.TryParse(massInputField.text, out mass))
+        {
+            massErrorText.text = "Масса должна быть числом.";
+            hasError = true;
+        }
+        else if (mass <= 0)
+        {
+            massErrorText.text = "Масса должна быть положительной.";
+            hasError = true;
+        }
 
-		if (mass <= 0)
-		{
-			ShowError("Масса должна быть положительной.");
-			return;
-		}
+        // Проверка угла
+        if (!float.TryParse(angleInputField.text, out angle))
+        {
+            angleErrorText.text = "Угол должен быть числом.";
+            hasError = true;
+        }
+        else if (angle < 0 || angle > 90)
+        {
+            angleErrorText.text = "Угол должен быть от 0 до 90.";
+            hasError = true;
+        }
 
-		if (!float.TryParse(angleInput, out angle))
-		{
-			ShowError("Угол — это число.");
-			return;
-		}
+        if (hasError) return;
 
-		if (angle < 0 || angle > 90)
-		{
-			ShowError("Угол должен быть от 0 до 90.");
-			return;
-		}
+        // Сохранение и переход к сцене
+        PlayerPrefs.SetFloat("BallMass", mass);
+        PlayerPrefs.SetFloat("CubeAngle", angle);
+        SceneManager.LoadScene("SimulationScene");
+    }
 
-		PlayerPrefs.SetFloat("BallMass", mass);
-		PlayerPrefs.SetFloat("CubeAngle", angle);
-		SceneManager.LoadScene("SimulationScene");
-	}
-
-	void ShowError(string msg)
-	{
-		errorText.text = msg;
-		errorPanel.SetActive(true);
-	}
-
-	public void OnCloseErrorPanel()
-	{
-		errorPanel.SetActive(false);
-	}
+    void ClearErrors()
+    {
+        massErrorText.text = "";
+        angleErrorText.text = "";
+    }
 }
