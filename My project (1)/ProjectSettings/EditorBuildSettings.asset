@@ -15,10 +15,10 @@ EditorBuildSettings:
     path: Assets/Scenes/vvod.unity
     guid: 9be891595f0388d499417c3d2d794a95
   - enabled: 1
-    path: Assets/Scenes/223.unity
+    path: Assets/Scenes/1yroven.unity
     guid: 47e33f86f1a0ad54f903f135f7212bed
   - enabled: 1
-    path: Assets/Scenes/2-3.unity
+    path: Assets/Scenes/2yroven.unity
     guid: f17f2461ab2eec140b46481832e91c3e
   - enabled: 1
     path: Assets/Scenes/settingss.unity
