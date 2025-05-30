@@ -1212,7 +1212,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2223,11 +2223,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 637019121037783573, guid: 08ff3a72eaafae54280996863e1a31ad, type: 3}
       propertyPath: m_Size
-      value: 0.54794115
+      value: 0.5479411
       objectReference: {fileID: 0}
     - target: {fileID: 637019121037783573, guid: 08ff3a72eaafae54280996863e1a31ad, type: 3}
       propertyPath: m_Value
-      value: 1.0000005
+      value: 1.0000004
       objectReference: {fileID: 0}
     - target: {fileID: 3044701293561011103, guid: 08ff3a72eaafae54280996863e1a31ad, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2241,6 +2241,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4224018304957654734, guid: 08ff3a72eaafae54280996863e1a31ad, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 47158922e349c584da3034cc84e56ca3, type: 3}
     - target: {fileID: 5074914881531656837, guid: 08ff3a72eaafae54280996863e1a31ad, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -2279,7 +2283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8587164086032128883, guid: 08ff3a72eaafae54280996863e1a31ad, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.4520589
+      value: 0.45205885
       objectReference: {fileID: 0}
     - target: {fileID: 8943993365532009312, guid: 08ff3a72eaafae54280996863e1a31ad, type: 3}
       propertyPath: m_Pivot.x
@@ -2811,8 +2815,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1864926628}
   - {fileID: 2043029596}
+  - {fileID: 1864926628}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -9,6 +9,8 @@ public class MusicSettingsMenu : MonoBehaviour
 {
     public Slider volumeSlider;
     public Button selectMusicButton;
+    public Button selectBackgroundButton;  // Новая кнопка
+    public RawImage backgroundImage;       // Объект, где будет фон
 
     private void Start()
     {
@@ -16,11 +18,17 @@ public class MusicSettingsMenu : MonoBehaviour
         {
             volumeSlider.value = MusicPlayer.Instance.audioSource.volume;
             volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
-            selectMusicButton.onClick.AddListener(OpenFileDialog);
+            selectMusicButton.onClick.AddListener(OpenMusicFileDialog);
         }
         else
         {
             Debug.LogError("MusicPlayer not found!");
+        }
+
+        // Подключаем обработчик кнопки выбора фона
+        if (selectBackgroundButton != null)
+        {
+            selectBackgroundButton.onClick.AddListener(OpenImageFileDialog);
         }
     }
 
@@ -30,7 +38,7 @@ public class MusicSettingsMenu : MonoBehaviour
             MusicPlayer.Instance.audioSource.volume = value;
     }
 
-    private void OpenFileDialog()
+    private void OpenMusicFileDialog()
     {
 #if UNITY_STANDALONE || UNITY_EDITOR
         var paths = StandaloneFileBrowser.OpenFilePanel("Выберите аудиофайл", "", new[] {
@@ -75,6 +83,43 @@ public class MusicSettingsMenu : MonoBehaviour
             case ".wav": return AudioType.WAV;
             case ".ogg": return AudioType.OGGVORBIS;
             default: return AudioType.UNKNOWN;
+        }
+    }
+
+    private void OpenImageFileDialog()
+    {
+#if UNITY_STANDALONE || UNITY_EDITOR
+        var paths = StandaloneFileBrowser.OpenFilePanel("Выберите изображение", "", new[] {
+            new ExtensionFilter("Image Files", "png", "jpg", "jpeg")
+        }, false);
+
+        if (paths.Length > 0 && File.Exists(paths[0]))
+        {
+            StartCoroutine(LoadAndSetImage(paths[0]));
+        }
+#endif
+    }
+
+    private IEnumerator LoadAndSetImage(string path)
+    {
+        string url = "file:///" + path.Replace("\\", "/");
+
+        using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(url))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Ошибка загрузки изображения: " + www.error);
+            }
+            else
+            {
+                Texture2D texture = DownloadHandlerTexture.GetContent(www);
+                if (backgroundImage != null)
+                {
+                    backgroundImage.texture = texture;
+                }
+            }
         }
     }
 }
