@@ -15,32 +15,43 @@ public class MenuUIController : MonoBehaviour
     private const float MaxForce = 100f;
 
     public void StartMagnetScene()
+{
+    errorText.text = "";
+
+    bool hasError = false;
+
+    if (!TryParseAndValidateForce(inputForce1.text, out float f1))
     {
-        errorText.text = "";
-
-        if (!TryParseAndValidateForce(inputForce1.text, out float f1))
-        {
-            errorText.text = $"Ошибка: сила магнита 1 должна быть числом от {MinForce} до {MaxForce}";
-            return;
-        }
-
-        if (!TryParseAndValidateForce(inputForce2.text, out float f2))
-        {
-            errorText.text = $"Ошибка: сила магнита 2 должна быть числом от {MinForce} до {MaxForce}";
-            return;
-        }
-
-        if (sceneNumber < 0 || sceneNumber >= SceneManager.sceneCountInBuildSettings)
-        {
-            errorText.text = $"Ошибка: номер сцены {sceneNumber} вне диапазона";
-            return;
-        }
-
-        PlayerPrefs.SetFloat("Magnet1Force", f1);
-        PlayerPrefs.SetFloat("Magnet2Force", f2);
-
-        SceneManager.LoadScene(sceneNumber);
+        errorText.text = $"Ошибка: сила магнита 1 должна быть числом от {MinForce} до {MaxForce}";
+        hasError = true;
     }
+
+    if (!TryParseAndValidateForce(inputForce2.text, out float f2))
+    {
+        // Добавление к существующему сообщению
+        errorText.text += (errorText.text != "" ? "\n" : "") + $"Ошибка: сила магнита 2 должна быть числом от {MinForce} до {MaxForce}";
+        hasError = true;
+    }
+
+    if (sceneNumber < 0 || sceneNumber >= SceneManager.sceneCountInBuildSettings)
+    {
+        errorText.text += (errorText.text != "" ? "\n" : "") + $"Ошибка: номер сцены {sceneNumber} вне диапазона";
+        hasError = true;
+    }
+
+    if (hasError)
+    {
+        Debug.LogWarning("Обнаружены ошибки ввода, сцена не загружается.");
+        return;
+    }
+
+    PlayerPrefs.SetFloat("Magnet1Force", f1);
+    PlayerPrefs.SetFloat("Magnet2Force", f2);
+
+    Debug.Log($"Загрузка сцены {sceneNumber}...");
+    SceneManager.LoadScene(sceneNumber);
+}
+
 
     private bool TryParseAndValidateForce(string input, out float value)
     {
